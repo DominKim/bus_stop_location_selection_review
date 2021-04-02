@@ -17,5 +17,5 @@
         
         
 ## 분석순서
-[분석 순서]<img src="https://scikit-learn.org/stable/_static/ml_map.png" width="80%" height="50%"></img>
+[분석 순서]<img src="https://github.com/DominKim/bus_stop_location_selection_review/blob/main/image/분석순서.png" width="80%" height="50%"></img>
 
