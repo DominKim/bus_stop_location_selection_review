@@ -16,5 +16,6 @@
         ! 지수(n + 1 ~ (n + 1) * 5) : 독립변수_1(1 ~ 5) + ... + 독립변수_1(1 ~ 5) + 대기오염지수(1 ~ 5)
         
         
-![Uploading image.png…]()
+## 분석순서
+[분석 순서]<img src="https://scikit-learn.org/stable/_static/ml_map.png" width="80%" height="50%"></img>
 
