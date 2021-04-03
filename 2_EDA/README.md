@@ -45,8 +45,11 @@ average_score = silhouette_score(df[col], df["label"])
 score_lst.append(average_score)
 ```
 
-- sns.lineplot(x = , y, ...) : linplot
- * sdfsdf
+- sns.lineplot(x = , y, ...) : lineplot
+    * plt.xlabel() : x축의 레이블 입력
+    * plt.ylabel() : y축의 레이블 입력
+    * ply.ylim() : y축의 범위
+    * plt.grid() : plot의 grid 설정
 ``` python3
 sns.lineplot(x = range(2, 6), y = score_lst, markers=True)
 plt.xlabel("군집 수")
@@ -56,6 +59,7 @@ plt.grid(True, axis = "y", alpha = 0.5, linestyle = "--")
 ```
 
 
+#
 
 
 
