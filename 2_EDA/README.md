@@ -1,21 +1,70 @@
-# bus_stop_location_selection_review
-- [수원시_스마트_버스정류장_우선_설치위치_선정](https://compas.lh.or.kr/subj/past/info?subjNo=SBJ_2102_002)
-  * 이 레포지토리는 약 20일간 대회를 참여하면서 사용한 코드와 지식들을 리뷰용임.
+## 전처리
 
-## 주의사항
-- 비공개 데이터의 사용
-  * 비공개들의 데이터들을 직접 사용해서 스크립트를 실행하기 위해서는 위의 링크로 들어가서 compas 서버상에서 직접 다운로드 후 실행해야 된다.
+### data set
+- df_500(training data set)
+    * 버스정류장 기준으로 500m 버퍼로 독립변수와 종속변수 데이터들을 뽑은 df
+- df_100(수원시)
+    * gid(100m x 100m)격자를 기준으로 독립변수 데이터들을 뽑은 df
+- df_100_to_500(test data set)
+    * gid격자의 중심을 기준으로 500m 버퍼로 독립변수 데이터들을 뽑은 df
+    
+### 전처리 순서
+1. df_500 실루엣 계수를 통한 군집수 선정
+2. df_500 군집 별 평균차이 검정
+3. df_100 실루엣 계수를 통한 군집수 선정
+4. df_100 군집 별 평균차이 검정
+5. df_100_to_500 실루엣 계수를 통한 군집수 선정
+6. df_100_to_500 군집 별 평균차이 검정
+7. df_500 상관분석을 통해 상관성이 높은 변수 중 변수제거 (why? 다중공선성 사전 제거)
+8. df_500 vif 다중공선성을 통해 10이상의 값을 보이는 변수 제거
+9. 공간회귀 분석을 통해 유의한 변수 추출(queen 가중치 사용)
 
-## 분석방법
-1. TOD와 공공시설 입지선정 변수들(독립변수)을 활용하면 버스 정류장 승하차건수(종속변수)예측 한다.
-2. 격자별 대기오염지수 변수들을 추출하여 승하차건수와 대기오염지수를 고려하여 버스정류장 우선 설치위치를 선정한다.
-    * 설치위치 지수 식
-        * 지수 = 승하차건수 * 0.8 + 대기오염지수 * 0.2
-3. 모델링 결과 시 성능이 안좋으면 새로운 지수를 생성하여 우선 설치위치를 선정한다.
-    * 선형회귀 시 유의한 독립변수들과 대기오염지수를 5점 척도로 변환 후 합하여 지수 산출
-        * 지수(n + 1 ~ (n + 1) * 5) = 독립변수_1(1 ~ 5) + ... + 독립변수_1(1 ~ 5) + 대기오염지수(1 ~ 5)
-        
-        
-## 분석순서
-<img src="https://github.com/DominKim/bus_stop_location_selection_review/blob/main/image/분석순서.png" width="80%" height="50%"></img>
+### 코드 리뷰
+- geopandas.points_from_xy(lon, lat) : 위동와 경도로 geometry 타입의 point 추출
+``` python3
 
+# geometry poin 생성
+geo = gpd.points_from_xy(df_500.lon, df_500.lat)
+```
+- Kmeans(n_clusters = i, init = "k-means++", max_iter = 300) : kmeans 군집분석
+``` python3
+kmeans = KMeans(n_clusters=i, init="k-means++", max_iter=300)
+kmeans.fit(df[col])
+df["label"] = kmeans.labels_
+```
+
+- silhouette_samples(독립변수, 종속변수(군집)) : 군집분석을 평가하기 위한 실루엣계수 점수 추출
+``` python3
+score_samples = silhouette_samples(df[col], df["label"])
+df["silhouette_coeff"] = score_samples
+```
+
+- silhouette_score(독리변수, 종속변수) : 실루엣계수 평균 추출
+``` python3
+average_score = silhouette_score(df[col], df["label"])
+score_lst.append(average_score)
+```
+
+- sns.lineplot(x = , y, ...) : linplot
+ * sdfsdf
+``` python3
+sns.lineplot(x = range(2, 6), y = score_lst, markers=True)
+plt.xlabel("군집 수")
+plt.ylabel("실루엣 계수")
+plt.ylim(0,1)
+plt.grid(True, axis = "y", alpha = 0.5, linestyle = "--")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+###
