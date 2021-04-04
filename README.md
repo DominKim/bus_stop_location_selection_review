@@ -19,3 +19,6 @@
 ## 분석순서
 <img src="https://github.com/DominKim/bus_stop_location_selection_review/blob/main/image/분석순서.png" width="80%" height="50%"></img>
 
+## 공간분석
+- python 공갑분석 패키지 : [Geographic Data Sceience with Python](https://geographicdata.science/book/notebooks/04_spatial_weights.html)
+
