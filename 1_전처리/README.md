@@ -70,3 +70,9 @@ def str_to_geo(x):
 df_gid_pop["gid_center"] = df_gid_pop["gid_center"].apply(lambda x: str_to_geo(x))
 df_gid_pop["gid_center"] = df_gid_pop["gid_center"].astype("geometry")
 ```
+
+- column to index
+``` python3
+# gid index화 후 loc로 뽑기
+df_gid = final_df.set_index("gid").loc[gid_with_rink, :].reset_index()
+```
