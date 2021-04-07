@@ -1,6 +1,14 @@
 # bus_stop_location_selection_review
 - [수원시_스마트_버스정류장_우선_설치위치_선정](https://compas.lh.or.kr/subj/past/info?subjNo=SBJ_2102_002)
   * 이 레포지토리는 약 20일간 대회를 참여하면서 사용한 코드와 지식들을 리뷰용임.
+  
+| 구분  | 내용 | 
+| -------------| ------------- | 
+| 수행기간 | 2021.03.01 ~ 2021.04.01 | 
+| 수행인원 | 2명 |
+| 사용언어 및 도구 | Python |
+| 주요 분석 기법 | 군집분석, T-test, SGD Regressor, 지수 산출, 공간회귀 |
+| 주요 패키지 | Geopandas, Pandas, Sklearn, numpy, Seaborn |
 
 ## 주의사항
 - 비공개 데이터의 사용
