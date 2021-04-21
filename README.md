@@ -31,3 +31,6 @@
 ## 공간분석
 - python 공갑분석 패키지 : [Geographic Data Sceience with Python](https://geographicdata.science/book/notebooks/04_spatial_weights.html)
 
+## 자기 피드백
+- 왜?가 부족했다. 
+ - 사전조사를 통해 TOD로 데이터 분석에 접근했지만 사전조사 결과에만 만족하고 분석을 진행하면서 종속변수나 결과물에 대해 끊임없이 왜?라는 질문이 필요했는데 자기만족에 빠져 하지 못했다
